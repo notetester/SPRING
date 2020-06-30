@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans  
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="doc1" class="ex06.autowired.Document"/>
+	<!-- 자바 문서에서 어노테이션 방식으로 의존 객체 자동 주입 -->
+	<bean id="printer" class="ex06.autowired.Printer">
+		<!-- <constructor-arg ref="doc1"/> -->
+	</bean>
+</beans>
