@@ -2,16 +2,25 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	<!-- 
 	1. 네임스페이스 context를 추가
 	2. anotation-config 태그를 추가해서 자동주입 명령을 사용할 수 있게 한다. 
 	-->
 	<context:annotation-config/>
+	<!-- 동일객체가 2개 있다면 에러를 발생시킴 -->
 	<bean id="doc1" class="ex06.autowired.Document"/>
+	<bean id="doc2" class="ex06.autowired.Document"/>
 	<!-- 자바 문서에서 어노테이션 방식으로 의존 객체 자동 주입 -->
 	<bean id="printer" class="ex06.autowired.Printer">
 		<!-- <constructor-arg ref="doc1"/> -->
 	</bean>
+	<bean id="printer2" class="ex06.autowired.Printer2"/>
+	<bean id="keyboard" class="ex07.quiz.Keyboard"/>
+	<bean id="monitor" class="ex07.quiz.Monitor"/>
+	<bean id="mouse" class="ex07.quiz.Mouse"/>
+	<bean id="computer" class="ex07.quiz.Computer"/>
 </beans>
