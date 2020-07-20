@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mytest.mapper.BoardMapper">
+	<insert id="regist">
+		insert into COMPLAIN(REGDATE,SECTOR,COMPTYPE,ADID,ADNAME,CUSNAME,CUSADD,COMPCON,ANS)
+		values(#{REGDATE},#{SECTOR},#{COMPTYPE},#{ADID},#{ADNAME},#{CUSNAME},#{CUSADD},#{COMPCON},#{ANS})
+	</insert>
+	<select id="getList" resultType="CompVO">
+		<![CDATA[
+		select *
+		from (
+		select rownum as rn,
+		       COMPMARK,
+		       COMPNUM,
+		       SECTOR,
+		       COMPTYPE,
+		       TITLE,
+		       REGDATE,
+		       STATUS,
+		       ADNAME
+		from (select * from COMPLAIN
+		]]>
+		<!--
+		<if test="searchType=='title'">where title like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='content'">where content like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='writer'">where writer like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='titcont'">where title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='' or searchType==null">where 1=1</if>
+		-->
+		<!--
+		<choose>
+			<when test="searchType=='title'">where title like '%'||#{searchName}||'%'</when>
+			<when test="searchType=='content'">where content like '%'||#{searchName}||'%'</when>
+			<when test="searchType=='writer'">where writer like '%'||#{searchName}||'%'</when>
+			<when test="searchType=='titcont'">where title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</when>
+			<otherwise>where 1=1</otherwise>
+		</choose>
+		-->
+		<![CDATA[
+		order by COMPNUM desc)
+		) where rn > (#{pageNum}-1)*#{amount} and rn <=#{pageNum}*#{amount}
+		]]>
+	</select>
+	<select id="getTotal" resultType="int">
+		select count(*) as total from COMPLAIN
+		<!--
+		<if test="searchType=='title'">where title like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='content'">where content like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='writer'">where writer like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='titcont'">where title like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'</if>
+		<if test="searchType=='' or searchType==null">where 1=1</if>
+		-->
+	</select>
+	<select id="getContent" resultType="CompVO">
+		select * from COMPLAIN where COMPNUM=#{COMPNUM}
+	</select>
+	<update id="update">
+		update COMPLAIN set REGDATE=#{REGDATE},SECTOR=#{SECTOR},COMPTYPE=#{COMPTYPE},CUSNAME=#{CUSNAME},CUSMAIL=#{CUSMAIL},CUSADD=#{CUSADD},TITLE=#{TITLE},COMPCON=#{COMPCON},ANSDATE=#{ANSDATE},STATUS=#{STATUS},ADID=#{ADID},MEMO=#{MEMO} where COMPNUM=#{COMPNUM}
+	</update>
+	<delete id="delete">
+		delete from COMPLAIN where COMPNUM=#{COMPNUM}
+	</delete>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.simple.mapper.BoardMapper">
+ 	<!-- VO를 전달하면 VO의 속성값을 그대로 사용가능합니다. -->
+ 	<insert id="boardRegist">
+ 		INSERT INTO BOARD(NUM,NAME,TITLE,CONTENT) VALUES(BOARD_SEQ.NEXTVAL,#{name},#{title},#{content})
+ 	</insert>
+ 	<!-- select 구문은 반환 타입이 반드시 적혀야 압니다 -->
+ 	<select id="getList" resultType="BoardVO">
+ 		SELECT * FROM BOARD
+ 	</select>
+ 	<!-- 단일 파라미터 이름은 그대로 사용이 가능합니다. -->
+ 	<delete id="boardDelete">
+ 		DELETE FROM BOARD WHERE NUM=#{num}
+ 	</delete>
+ </mapper>
