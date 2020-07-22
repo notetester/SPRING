@@ -7,12 +7,18 @@
 	<name>MyWeb</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
+	
+	
+	<!-- 자바버전 변경, 스프링 버전 변경 -->
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>5.2.7.RELEASE</org.springframework-version>
+		<org.springframework-version>5.0.7.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	
+	
+	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -91,10 +97,11 @@
 		</dependency>
 				
 		<!-- Servlet -->
+		<!-- 참조하는 서블릿 버전 3.1.0선언 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>4.0.1</version>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -109,56 +116,70 @@
 			<version>1.2</version>
 		</dependency>
 	
-		<!-- Test -->
+	
+	
+		<!-- 필요한 라이브러리 순서대로 추가 -->
+		<!-- Test버전을 4.12로 변경(4.7버전이 하위 버전이기 떄문에) -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13</version>
+			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency>
+		<!-- 스프링 테스트 환경  -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-test</artifactId>
-		    <version>5.2.7.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		    <scope>test</scope>
 		</dependency>
+		
+		<!-- 오라클 커넥터 -->
 		<dependency>
-		    <groupId>com.oracle.database.jdbc</groupId>
+		    <groupId>com.oracle.ojdbc</groupId>
 		    <artifactId>ojdbc8</artifactId>
-		    <version>19.7.0.0</version>
+		    <version>19.3.0.0</version>
 		</dependency>
-		<dependency>
+	    <!-- 히카리 커넥션 풀 -->    
+	    <dependency>
 		    <groupId>com.zaxxer</groupId>
 		    <artifactId>HikariCP</artifactId>
-		    <version>3.4.5</version>
+		    <version>2.7.4</version>
 		</dependency>
+		<!-- 스프링에서 제공하는 jdbc기능을 사용하기 위해 반드시 필요 -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
-		    <version>5.2.7.RELEASE</version>
+		    <version>${org.springframework-version}</version>
 		</dependency>
+		<!-- 마이바티스 라이브러리-->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis</artifactId>
-		    <version>3.5.5</version>
+		    <version>3.4.6</version>
 		</dependency>
+		<!-- 마이바티스와 spring을 연결해주는 라이브러리 -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis-spring</artifactId>
-		    <version>2.0.5</version>
+		    <version>1.3.2</version>
 		</dependency>
+		
+		<!-- 롬복(getter,setter자동생성) -->
 		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.12</version>
-		    <scope>provided</scope>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.10</version>
+			<scope>provided</scope>
 		</dependency>
-		<!-- 비동기 통신을 하기 위해 JSON 형식으로 변환해주는 라이브러리 -->
+		
+		<!-- 비동기통신을 하기위해 JSON형태로 변환해주는 라이브러리 -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-		    <version>2.11.1</version>
+		    <version>2.9.8</version>
 		</dependency>
+       
 	</dependencies>
     <build>
         <plugins>
@@ -176,10 +197,12 @@
                     <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
             </plugin>
+            
+            <!-- 메이븐 버전 3.5.1변경, 컴파일 버전 1.8로 변경 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

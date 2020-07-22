@@ -2,8 +2,16 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
-<configuration>
-	<typeAliases>
-		<typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>
-	</typeAliases>
-</configuration>
+  
+ <configuration>
+ 	<typeAliases>
+ 		<typeAlias type="com.team404.command.FreeBoardVO" alias="FreeBoardVO"/>	
+ 		<typeAlias type="com.team404.command.ReplyVO" alias="ReplyVO"/>
+ 	</typeAliases>
+  </configuration>
+
+  
+  
+  
+  
+  
