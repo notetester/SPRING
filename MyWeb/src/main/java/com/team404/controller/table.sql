@@ -24,3 +24,22 @@ create table FREEREPLY(
 );
 create SEQUENCE freereply_seq INCREMENT by 1 start with 1 nocache;
 alter table freereply add CONSTRAINT freereply_pk PRIMARY KEY (rno);
+
+--회원
+create table users(
+    userId varchar2(50) not null,
+    userPw varchar2(50) not null,
+    userName varchar2(50) not null,
+    userPhone1 varchar2(50) not null,
+    userPhone2 varchar2(50) not null,
+    userEmail1 varchar2(50) not null,
+    userEmail2 varchar2(50) not null,
+    addrZipNum varchar2(50) not null,
+    addrBasic varchar2(300) not null,
+    addrDetail varchar2(300) not null,
+    regdate date default sysdate
+);
+alter table users add CONSTRAINT users_pk PRIMARY KEY (userId);
+
+
+

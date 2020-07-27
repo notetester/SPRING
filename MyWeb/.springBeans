@@ -7,10 +7,11 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/spring/servlet-context.xml</config>
-		<config>src/main/webapp/WEB-INF/spring/DB-context.xml</config>
+		<config>src/main/webapp/WEB-INF/config/intercepter-context.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/config/servlet-context.xml</config>
+		<config>src/main/webapp/WEB-INF/config/DB-context.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

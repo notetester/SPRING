@@ -340,7 +340,6 @@
      		
      		
      		//날짜처리 함수
-     		timeStamp();
      		function timeStamp(millis) {
      			
      			var date = new Date(); //현재 날짜
@@ -368,11 +367,7 @@
      		}
     	}) //ready 함수 end
         </script>
-        
-        
-        
-        <button data-target="#replyModal" data-toggle="modal">확인</button>
-        
+
         
 
 		<!-- 모달 -->
