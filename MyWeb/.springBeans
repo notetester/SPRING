@@ -8,6 +8,7 @@
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
 		<config>src/main/webapp/WEB-INF/config/intercepter-context.xml</config>
+		<config>src/main/webapp/WEB-INF/config/aop-context.xml</config>
 	</configs>
 	<autoconfigs>
 		<config>src/main/webapp/WEB-INF/config/servlet-context.xml</config>

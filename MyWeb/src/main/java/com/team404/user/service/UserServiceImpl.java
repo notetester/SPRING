@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService{
 		return userMapper.login(vo);
 	}
 
+	@Override
+	public UserVO userInfo(String userId) {
+		
+		return userMapper.userInfo(userId);
+	}
+
 }

@@ -35,8 +35,14 @@ public class UserController {
 	}
 	
 	@RequestMapping("/userMypage")
-	public String userMypage() {
-
+	public String userMypage(HttpSession session) {
+		
+		String userId = (String)session.getAttribute("userId");
+		//마이페이지 진입시 join처리
+		
+		userService.userInfo(userId);
+		
+		
 		return "user/userMypage";
 	}
 	
@@ -60,6 +66,7 @@ public class UserController {
 			RA.addFlashAttribute("msg", "회원가입을 축하합니다");
 		} else {
 			RA.addFlashAttribute("msg", "회원가입에 실패했습니다");
+			
 		}
 
 		return "redirect:/user/userLogin";

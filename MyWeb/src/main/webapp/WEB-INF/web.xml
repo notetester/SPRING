@@ -20,7 +20,8 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 				/WEB-INF/config/servlet-context.xml
-				/WEB-INF/config/interceptor-context.xml
+				/WEB-INF/config/intercepter-context.xml
+				/WEB-INF/config/aop-context.xml
 			</param-value>
 			
 		</init-param>
