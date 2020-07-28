@@ -1,5 +1,7 @@
 package com.team404.user.service;
 
+import java.util.List;
+
 import com.team404.command.UserVO;
 
 public interface UserService {

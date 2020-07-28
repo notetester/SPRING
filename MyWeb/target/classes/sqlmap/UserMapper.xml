@@ -17,12 +17,50 @@
 		select count(*) as count from users
 		where userId = #{userId} and userPw = #{userPw}
 	</select>
+
+
 	
+	<!-- 1:N관계 join처리 할 때 resultMap태그를 이용할 수 있습니다. -->
+	<!-- type에는 맵핑클래스의 경로, id는 고유 식별값, column은 컬럼명, property는 멤버변수명 -->
+	<resultMap type="UserVO" id="boardList">
+		<result column="userid" property="userId"/>
+		<result column="userpw" property="userPw"/>
+		<result column="username" property="userName"/>
+		<result column="userphone1" property="userPhone1"/>
+		<result column="userphone2" property="userPhone2"/>
+		<result column="useremail1" property="userEmail1"/>
+		<result column="useremail2" property="userEmail2"/>
+		<result column="addrzipnum" property="addrZipNum"/>
+		<result column="addrbasic" property="addrBasic"/>				
+		<result column="addrdetail" property="addrDetail"/>
+		<collection  resultMap="list"  property="userBoardList"/>
+	</resultMap>
+	<resultMap type="FreeBoardVO" id="list">
+		<result column="bno" property="bno" />
+		<result column="title" property="title" />
+		<result column="regdate" property="regdate" />
+	</resultMap>
 	
-	<select id="userInfo">
-		<!-- leftouter join쿼리 -->
+	<select id="userInfo" resultMap="boardList"  >
+		select userid,
+		       userpw,
+		       username,
+		       userphone1,
+		       userphone2,
+		       useremail1,
+		       useremail2,
+		       addrzipnum,
+		       addrbasic,
+		       addrdetail,
+		       f.bno,
+		       f.title,
+		       f.regdate
+		from users u
+		left outer join freeBoard f
+		on u.userid = f.writer
+		where userid = #{userId}
 	</select>
-	
+
 	
 	
 </mapper>

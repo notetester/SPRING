@@ -1,11 +1,15 @@
 package com.team404.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,12 +39,15 @@ public class UserController {
 	}
 	
 	@RequestMapping("/userMypage")
-	public String userMypage(HttpSession session) {
+	public String userMypage(HttpSession session, Model model) {
 		
 		String userId = (String)session.getAttribute("userId");
-		//마이페이지 진입시 join처리
 		
-		userService.userInfo(userId);
+		
+		//마이페이지 진입시 join처리
+		UserVO userVO = userService.userInfo(userId);
+		model.addAttribute("userVO", userVO);
+		
 		
 		
 		return "user/userMypage";

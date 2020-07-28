@@ -14,7 +14,6 @@
 <fullyQualifiedTypeName name="com.team404.freeboard.service.FreeBoardService"/>
 <fullyQualifiedTypeName name="com.team404.mapper.FreeBoardMapper"/>
 <fullyQualifiedTypeName name="com.team404.command.FreeBoardVO"/>
-<fullyQualifiedTypeName name="org.springframework.ui.Model"/>
 <fullyQualifiedTypeName name="com.team404.util.Criteria"/>
 <fullyQualifiedTypeName name="com.team404.util.PageVO"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
@@ -41,7 +40,6 @@
 <fullyQualifiedTypeName name="com.team404.reply.mapper.ReplyMapper"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="lombok.Data"/>
 <fullyQualifiedTypeName name="com.team404.command.UserVO"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
 <fullyQualifiedTypeName name="java.util.logging.Logger"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.springframework.ui.Model"/>
 </qualifiedTypeNameHistroy>

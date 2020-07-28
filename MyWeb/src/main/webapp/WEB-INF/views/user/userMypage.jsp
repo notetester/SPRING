@@ -46,15 +46,15 @@
                                 <tbody class="m-control">
                                     <tr>
                                         <td class="m-title">*ID</td>
-                                        <td><input class="form-control input-sm"></td>
+                                        <td><input class="form-control input-sm" name="userId" value="${userVO.userId}" readonly></td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*이름</td>
-                                        <td><input class="form-control input-sm"></td>
+                                        <td><input class="form-control input-sm" name="userName" value="${userVO.userName }"></td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*비밀번호</td>
-                                        <td><input class="form-control input-sm"></td>
+                                        <td><input class="form-control input-sm" name="userPw"></td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*비밀번호확인</td>
@@ -63,39 +63,39 @@
                                     <tr>
                                         <td class="m-title">*E-mail</td>
                                         <td>
-                                            <input class="form-control input-sm">@
-                                            <select class="form-control input-sm sel">
-                                                <option>naver.com</option>
-                                                <option>gmail.com</option>
-                                                <option>daum.net</option>
+                                            <input class="form-control input-sm" name="userEmail1" value="${userVO.userEmail1 }" >@
+                                            <select class="form-control input-sm sel" name="userEmail2">
+                                                <option ${userVO.userEmail2 eq 'naver.com' ? 'selected' : '' }>naver.com</option>
+                                                <option ${userVO.userEmail2 eq 'gmail.com' ? 'selected' : '' }>gmail.com</option>
+                                                <option ${userVO.userEmail2 eq 'daum.net'  ? 'selected' : '' }>daum.net</option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*휴대폰</td>
                                         <td>
-                                            <select class="form-control input-sm sel">
+                                            <select class="form-control input-sm sel" name="userPhone1">
                                                 <option>010</option>
                                                 <option>011</option>
                                                 <option>017</option>
                                                 <option>018</option>
                                             </select>
-                                            <input class="form-control input-sm">
+                                            <input class="form-control input-sm" name="userPhone2" value="${userVO.userPhone2 }">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*우편번호</td>
-                                        <td><input class="form-control input-sm" readonly>
+                                        <td><input class="form-control input-sm" name="addrZipNum" value="${userVO.addrZipNum }"   readonly>
                                         	<button type="button" class="btn btn-primary" id="addBtn">중복확인</button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*주소</td>
-                                        <td><input class="form-control input-sm add"></td>
+                                        <td><input class="form-control input-sm add" name="addrBasic" value="${userVO.addrBasic }"></td>
                                     </tr>
                                     <tr>
                                         <td class="m-title">*상세주소</td>
-                                        <td><input class="form-control input-sm add"></td>
+                                        <td><input class="form-control input-sm add" name="addrDetail" value="${userVO.addrDetail }"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -119,25 +119,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
+                                    <c:forEach var="vo" items="${userVO.userBoardList }">
                                     <tr>
-                                        <td>1</td>
-                                        <td><a href="##">첫글</a></td>
-                                        <td>~~~~~</td>
+                                        <td>${vo.bno }</td>
+                                        <td><a href="../freeBoard/freeDetail?bno=${vo.bno }">${vo.title }</a></td>
+                                        <td>${vo.regdate }</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><a href="##">두글</a></td>
-                                        <td>~~~~~</td>
-                                    </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                             </form>
                         </div>
                         <!-- 두번째 토글 끝 -->
+                        
+                        
+                        
                         <div id="menu2" class="tab-pane fade">
                             <h3>Menu 2</h3>
                             <p>Some content in menu 2.</p>
                         </div>
+                        
+                        
+                        
+                        
                     </div>
                 </div>
             </div>
