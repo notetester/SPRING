@@ -42,4 +42,23 @@ create table users(
 alter table users add CONSTRAINT users_pk PRIMARY KEY (userId);
 
 
+--sns게시글
+create table snsboard(
+    
+    bno number(10,0) not null,
+    writer varchar2(50) not null,
+    content varchar2(2000) not null,
+    fileloca varchar2(200),  --파일이 저장된 위치
+    filename varchar2(50),  --파일이름
+    filerealname varchar2(50), --파일실제이름
+    regdate date default sysdate
+);
+alter table snsboard add CONSTRAINT snsboard_pk PRIMARY KEY (bno);
+create SEQUENCE snsboard_seq INCREMENT by 1 start with 1 nocache;
+
+
+
+
+
+
 

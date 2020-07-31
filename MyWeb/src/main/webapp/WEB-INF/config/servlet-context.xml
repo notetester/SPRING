@@ -19,6 +19,17 @@
 	
 	<context:component-scan base-package="com.team404.*" />
 	
-	
+	<!-- 파일업로드 설정 -->
+	<!-- 아이디를  id를 반드시 multipartResolver 라 적는다 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 파일크기 설정 -->
+		<beans:property name="maxUploadSize" value="52428800" />
+		<!-- 파일인코딩 설정 -->
+		<beans:property name="defaultEncoding" value="utf-8"/>
+	</beans:bean>
 	
 </beans:beans>
+
+
+
+
