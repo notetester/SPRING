@@ -332,7 +332,7 @@
 				var file = $("#file").val();
 				var file = file.substring( file.lastIndexOf(".") + 1 , file.length ).toLowerCase();
 
-				if( /*userId === ''*/ false   ) {
+				if( userId === '' /*false*/ ) {
 					alert("로그인이 필요한 서비스 입니다")
 					return; //함수종료
 				} else if( file != 'jpg' && file != 'png' && file != 'jpeg'   ) {
@@ -360,9 +360,16 @@
 					data: formData,
 					success : function(data) {
 						
+						if(data == "success") {
+							$("#file").val(""); //파일업로드값
+							$("#content").val(""); //글영역
+							$("#.fileDiv").css("display", "none"); //미리보기 감추기
+						} else {
+							alert("업로드에 실패했습니다. 관리자에게 문의하세요");
+						}
 					},
 					error : function(status, er) {
-						
+						alert("업로드에 실패했습니다. 관리자에게 문의하세요");
 					}
 			
 				})

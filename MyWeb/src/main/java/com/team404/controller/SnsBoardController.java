@@ -6,31 +6,55 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.team404.command.SnsBoardVO;
+import com.team404.snsboard.service.SnsBoardService;
+
 @Controller
 @RequestMapping("/snsBoard")
 public class SnsBoardController {
-
+	
+	@Autowired
+	@Qualifier("snsBoardService")
+	private SnsBoardService snsBoardService;
+	
+	
 	@RequestMapping("/snsList")
 	public void snsList() {
 	}
+	
+	
 	
 	//화면에서 비동기형식으로 파일데이터와 content데이터를 받음.
 	//업로드 방식 데이터베이스 파일 업로드 경로 저장, 실제 파일은 하드디스크에 저장
 	@ResponseBody
 	@RequestMapping("/regist")
 	public String regist(@RequestParam("file") MultipartFile file,
-						 @RequestParam("content") String content
-						 ) {
+						 @RequestParam("content") String content,
+						 HttpSession session 
+						) {
 		try {
+			//0. 세션정보 
+			String writer = (String)session.getAttribute("userId");
+			if(writer == null) {
+				throw new Exception(); //강제에러 발생 catch구문으로
+			}
+			
+			
+			
 			//2. 날짜별로 폴더생성
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -69,16 +93,22 @@ public class SnsBoardController {
 			file.transferTo(saveFile);
 			
 			//7. 디비에 insert
+			SnsBoardVO vo = new SnsBoardVO(0, writer, content, fileLoca, fileName, fileRealName, null);
 			
+			boolean result = snsBoardService.regist(vo);
+			
+			//요청한 화면으로
+			if(result) {
+				return "success";
+			} else {
+				return "fail";
+			}
+		
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "fail"; //에러시에도 fail반환
 		} 
 
-		
-		System.out.println(file);
-		System.out.println(content);
-
-		return "1";
 	}
 	
 }
