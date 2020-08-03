@@ -363,7 +363,8 @@
 						if(data == "success") {
 							$("#file").val(""); //파일업로드값
 							$("#content").val(""); //글영역
-							$("#.fileDiv").css("display", "none"); //미리보기 감추기
+							$(".fileDiv").css("display", "none"); //미리보기 감추기
+							getList();
 						} else {
 							alert("업로드에 실패했습니다. 관리자에게 문의하세요");
 						}
@@ -373,12 +374,92 @@
 					}
 			
 				})
-				
-				
-				
-				
 			}
 			
+			
+			//목록 처리
+			getList();
+			function getList() {
+				
+				$.getJSON(
+					"getList",
+					function(list) {
+						
+						var strAdd = "";
+						for(var i = 0; i < list.length; i++) {
+							strAdd += '<div class="title-inner">';
+							strAdd += '<div class="profile">';
+							strAdd += '<img src="../resources/img/profile.png">';
+							strAdd += '</div>';
+							strAdd += '<div class="title">';
+							strAdd += '<p>'+ list[i].writer +'</p>';
+							strAdd += '<small>'+ timeStamp(list[i].regdate) +'</small>';
+							strAdd += '</div>';
+							strAdd += '</div>';
+							strAdd += '<div class="content-inner">';
+							strAdd += '<p>'+ (list[i].content == null ? '' : list[i].content)  +'</p>';
+							strAdd += '</div>';
+							strAdd += '<div class="image-inner">';
+							strAdd += '<a href="'+ list[i].bno +'">'; //추가
+							strAdd += '<img src="display?fileLoca='+ list[i].fileLoca +'&fileName='+ list[i].fileName +'">';
+							strAdd += '</a>'; //추가
+							strAdd += '</div>';
+							strAdd += '<div class="like-inner">';
+							strAdd += '<img src="../resources/img/icon.jpg"><span>522</span>';
+							strAdd += '</div>';
+							strAdd += '<div class="link-inner">';
+							strAdd += '<a href="##"><i class="glyphicon glyphicon-thumbs-up"></i>좋아요</a>';
+							strAdd += '<a href="##"><i class="glyphicon glyphicon-comment"></i>댓글달기</a>'; 
+							strAdd += '<a href="##"><i class="glyphicon glyphicon-remove"></i>삭제하기</a>';
+							strAdd += '</div>';
+						}
+						$("#contentDiv").html(strAdd); //innerHTML
+						
+					}
+				)
+				
+			} 
+			
+			//상세보기처리(부모에 이벤트를 걸고 전파시키는 방법을 사용)
+			$("#contentDiv").on("click", ".image-inner a", function() {
+				event.preventDefault();
+				//클릭된 a태그의 정보
+				var bno = $(this).attr("href");
+				console.log(bno);
+				//모달창 띄우기
+				$("#snsModal").modal("show");
+				
+			}) 
+			
+			
+			
+			
+     		//날짜처리 함수
+     		function timeStamp(millis) {
+     			
+     			var date = new Date(); //현재 날짜
+     			var gap = date.getTime() - millis ; //현재날짜를 밀리초로변환 - 등록일밀리초 == 시간차
+    			
+     			var time; //리턴할 시간
+     			if( gap < 1000 * 60 * 60 * 24 ) { //1일 미만인 경우
+     				if(gap < 1000 * 60 * 60) { //1시간 미만인 경우
+     					time = "방금전";
+     				} else { //1시간 이상인 경우
+     					time = parseInt(gap / (1000 * 60 * 60) ) + "시간전";
+     				}
+     			} else { //1일 이상인 경우
+     				var today = new Date(millis);
+					var year = today.getFullYear(); //년   				
+     				var month = today.getMonth() + 1; //월
+     				var day = today.getDate(); //일
+     				var hour = today.getHours(); //시
+     				var minute = today.getMinutes(); //분
+     				var second = today.getSeconds(); //초
+ 					
+     				time = year + "년" + month + "월" + day + "일 " + hour + ":" + minute + ":"  + second ;
+     			}
+     			return time;
+     		}
 		})
 		
 		

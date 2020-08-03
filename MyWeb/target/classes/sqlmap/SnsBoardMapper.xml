@@ -11,4 +11,9 @@
 		values( snsboard_seq.nextval, #{writer}, #{content}, #{fileLoca}, #{fileName}, #{fileRealName}  )
 	</insert>
 	
+	<select id="getList" resultType="SnsBoardVO">
+		select * from snsboard order by bno desc				
+	</select>
+	
+	
 </mapper>  
