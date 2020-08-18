@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- 인터셉터로 생성할 클래스를 빈으로 생성 -->
+	<bean id="userInterceptor" class="com.lcb404.utill.interceptor.UserInterceptor"/>
+	<bean id="boardInterceptor" class="com.lcb404.utill.interceptor.BoardInterceptor"/>
+	
+	<!-- 요청을 가로챌 경로에 대해 bean을 주입 -->
+	<mvc:interceptors>
+		<mvc:interceptor >
+			<mvc:mapping path="/user/user_mypage"/>
+			<mvc:mapping path="/board/QNA"/>
+			<mvc:mapping path="/board/noticeRegist"/>
+			<mvc:mapping path="/board/MissingRegist"/>
+			<mvc:mapping path="/menuevent/memberShip"/>
+			<ref bean="userInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
+			<mvc:mapping path="/board/noticeModify"/>
+			<mvc:mapping path="/board/noticeDetail"/>
+			
+			<mvc:mapping path="/board/QNAModify"/>
+			<mvc:mapping path="/board/QNADetail"/>
+			
+			<mvc:mapping path="/missboard/MissingModify"/>
+			<mvc:mapping path="/missboard/MissingDetail"/>
+			<ref bean="boardInterceptor"/>
+		</mvc:interceptor>
+		
+	
+	</mvc:interceptors>
+	
+
+</beans>

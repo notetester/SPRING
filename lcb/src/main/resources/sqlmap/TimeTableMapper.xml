@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lcb404.mapper.TimeTableMapper">
+
+	<select id="getTime" resultType="TimeTableVO">
+		select * from timetable where timetable_start like #{day} order by timetable_number
+	</select>
+	
+	<select id="getPoster" resultType="TimeTableVO">
+		select * from timetable where timetable_number = #{timetable_number}
+	</select>
+	
+	<update id="total">
+		update timetable set timetable_totalseat = (timetable_totalseat-#{total}) where timetable_number = #{timetable_number}
+	</update>
+</mapper>

@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("test")
 public class TestController {
 	@RequestMapping("/test")
-	public String freeRegist() {
+	public String test() {
 		return "test/test";
+	}
+	@RequestMapping("/test2")
+	public String test2() {
+		return "test/test2";
 	}
 }
